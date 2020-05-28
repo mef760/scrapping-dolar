@@ -2,16 +2,20 @@
 extern crate prettytable;
 extern crate reqwest;
 extern crate select;
+extern crate chrono;
 
 use select::document::Document;
-use select::predicate::{Class, Name };
+use select::predicate::{Class, Name};
 use prettytable::Table;
+use chrono::{Utc};
 
 fn main() {
-    hacker_news("https://www.dolarhoy.com");
+    let now = Utc::now();
+    println!("{}", now.format("%a %b %e %T %Y"));
+    dolar_table("https://www.dolarhoy.com");
 }
 
-fn hacker_news(url: &str) {
+fn dolar_table(url: &str) {
 
     let resp = reqwest::get(url).unwrap();
     assert!(resp.status().is_success());
